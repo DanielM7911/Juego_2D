@@ -1,79 +1,142 @@
-/* ============================================================================
-   styles.css — Estilo formal
-   ============================================================================ */
-
+/* ===== Base ===== */
 * { box-sizing: border-box; }
+:root{
+  --bg:#0b1020;
+  --panel:#0f1730;
+  --ink:#E9EDFF;
+  --muted:#a9b6ff;
+  --accent:#2c4dd7;
+  --card:#0f1738;
+}
 
+html,body{height:100%}
 body {
   margin: 0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: #0b1020;     /* fondo general sobrio */
-  color: #E9EDFF;
+  background: var(--bg);
+  color: var(--ink);
   display: grid;
-  place-items: start center;
-  gap: 12px;
-  padding: 16px;
+  grid-template-rows: auto 1fr auto; /* topbar, contenido, footer */
+  min-height: 100vh;
 }
 
-/* Encabezado HUD */
-h1 { margin: 0; font-size: 18px; color:#c6d4ff }
-.hud {
-  width: 600px;
-  display:flex; justify-content: space-between; align-items:center; gap:12px;
+/* ===== Topbar: título + acciones sin amontonarse ===== */
+.topbar{
+  max-width: 980px;
+  width: 100%;
+  margin: 12px auto;
+  padding: 10px 14px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.topbar h1{ margin:0; font-size: 20px; letter-spacing:.3px; color:#c6d4ff }
+.actions{
+  display:flex; gap:10px; flex-wrap:wrap; /* evita amontonamiento */
+}
+button{
+  background: var(--accent);
+  color: var(--ink);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.12);
+}
+button:hover{ filter: brightness(1.08); }
+
+/* ===== Layout principal: canvas + sidebar derecha ===== */
+.play-area{
+  max-width: 980px;
+  width: 100%;
+  margin: 0 auto 16px;
+  display: grid;
+  grid-template-columns: 600px minmax(240px, 1fr);
+  gap: 18px;
+  align-items: start;
 }
 
-/* Marco contenedor */
+/* Canvas enmarcado */
 .frame {
   position: relative;
-  width:600px; height:600px;
+  width: 600px; height: 600px;
   border-radius: 14px;
   padding: 10px;
-  background: #0f1730;   /* color sólido */
+  background: var(--panel);
   box-shadow: 0 14px 36px rgba(0,0,0,.45),
               inset 0 0 0 1px rgba(255,255,255,.06);
 }
 
-/* Canvas principal */
 #game {
   width: 600px; height: 600px;
   border-radius: 12px;
-  background: #0d132b;   /* canvas limpio, sin patrón */
+  background: #0d132b; /* liso */
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
 }
 
-/* Capa extra decorativa (gradiente ligero) */
 .gridTint {
   position:absolute; left:10px; top:10px;
-  width:600px; height:600px;
-  border-radius:12px; pointer-events:none;
+  width:600px; height:600px; border-radius:12px; pointer-events:none;
   opacity:.18;
-  mix-blend-mode: normal; /* ya no usa screen, más formal */
+  mix-blend-mode: normal;
 }
 
-/* Texto de ayuda */
-.help { width: 600px; color:#a9b6ff; font-size:14px }
-
-/* Botones */
-button {
-  background: #2c4dd7; color:#e7ecff; border: none;
-  padding: 8px 12px; border-radius: 10px; cursor: pointer;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.12);
+/* Sidebar a la derecha: estado + instrucciones */
+.sidebar{
+  background: var(--panel);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 10px 26px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.06);
 }
-button:hover { filter: brightness(1.08); }
+.live{
+  display:grid; gap:6px;
+  font-size: 14px;
+}
+.live .k{ color:#c6d4ff; opacity:.9; margin-right:4px; }
+.help-right{ color: var(--muted); font-size:14px; }
+.help-right h2{
+  margin: 12px 0 8px;
+  font-size: 16px; color:#cfe0ff;
+}
+.help-right ul{ margin:0; padding-left:18px; }
+.help-right li{ margin:6px 0; }
 
-/* Overlay (pausa / game over) */
+/* ===== Overlay (pausa/game over) ===== */
 .overlay.hidden { display:none; }
 .overlay {
   position: fixed; inset: 0;
   background: rgba(0,0,0,.5);
   display:grid; place-items:center;
+  z-index: 10;
 }
 .modal {
-  background:#0f1738;
+  background: var(--card);
   padding: 20px;
   border-radius: 12px;
-  width: 420px;
+  width: min(480px, 92vw);
   text-align:center;
   box-shadow: 0 10px 30px rgba(0,0,0,.5);
 }
 .modal h2 { margin-top:0 }
+
+/* ===== Footer con créditos ===== */
+.footer{
+  width:100%;
+  border-top: 1px solid rgba(255,255,255,.06);
+  background: #0b1226;
+  color: #cdd7ff;
+  font-size: 14px;
+}
+.footer p{
+  max-width: 980px;
+  margin: 10px auto;
+  padding: 10px 14px;
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 980px){
+  .play-area{
+    grid-template-columns: 1fr;  /* Canvas arriba, sidebar abajo */
+    justify-items: center;
+  }
+  .frame{ margin: 0 auto; }
+  .sidebar{ width: min(600px, 92vw); }
+}

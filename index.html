@@ -3,35 +3,53 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Víbora 2D</title>
+  <title>Víbora WebGL — Niveles y Obstáculos</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="hud">
-    <div class="left">
-      <h1>SNAKE 2D</h1>
-      <div id="status">
-        Puntaje: <b id="score">0</b>
-        • Nivel: <b id="level">1</b>
-        • Velocidad: <b id="speed">8</b>/s
-        • Comida cambia en: <b id="foodTimer">—</b>s
-      </div>
-    </div>
-    <div class="right">
+
+  <!-- Barra superior: título + acciones bien espaciadas -->
+  <header class="topbar">
+    <h1>SNAKE 2D</h1>
+    <div class="actions">
       <button id="btnPause" title="P">⏸ Pausa</button>
       <button id="btnReset" title="R">🔄 Reiniciar</button>
     </div>
-  </div>
+  </header>
 
-  <div class="frame">
-    <canvas id="game" width="600" height="600"></canvas>
-    <canvas id="tint" class="gridTint" width="600" height="600"></canvas>
-  </div>
+  <!-- Área principal: canvas a la izquierda + instrucciones a la derecha -->
+  <main class="play-area">
+    <div class="frame">
+      <canvas id="game" width="600" height="600"></canvas>
+      <canvas id="tint" class="gridTint" width="600" height="600"></canvas>
+    </div>
 
-  <div class="help">
-    <p><b>Controles:</b> ← ↑ → ↓ / WASD · P (pausa) · R (reiniciar)</p>
-  </div>
+    <aside class="sidebar">
+      <!-- Estado en vivo (mismos IDs que usa main.js) -->
+      <div class="live">
+        <div><span class="k">Puntaje:</span> <b id="score">0</b></div>
+        <div><span class="k">Nivel:</span> <b id="level">1</b></div>
+        <div><span class="k">Velocidad:</span> <b id="speed">8</b>/s</div>
+        <div><span class="k">Comida cambia en:</span> <b id="foodTimer">—</b>s</div>
+      </div>
 
+      <hr/>
+
+      <!-- Instrucciones al lado derecho -->
+      <section class="help help-right">
+        <h2>Instrucciones</h2>
+        <ul>
+          <li>Usa <b>← ↑ → ↓</b> o <b>W A S D</b> para moverte.</li>
+          <li>Presiona <b>P</b> para Pausar/Continuar.</li>
+          <li>Presiona <b>R</b> para Reiniciar.</li>
+          <li>Come comida para sumar puntos y subir de nivel.</li>
+          <li>Evita chocar con tu cuerpo, paredes y obstáculos.</li>
+        </ul>
+      </section>
+    </aside>
+  </main>
+
+  <!-- Overlay (pausa / game over) -->
   <div id="overlay" class="overlay hidden">
     <div class="modal">
       <h2 id="modalTitle">Juego en pausa</h2>
@@ -40,6 +58,15 @@
     </div>
   </div>
 
+  <!-- Footer con créditos -->
+  <footer class="footer">
+    <p>© <span id="year"></span> — Videojuego desarrollado por <b>Daniel Morales</b></p>
+  </footer>
+
+  <script>
+    // Solo para el año del footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
   <script type="module" src="src/main.js"></script>
 </body>
 </html>
