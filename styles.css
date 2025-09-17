@@ -1,0 +1,79 @@
+/* ============================================================================
+   styles.css — Estilo formal
+   ============================================================================ */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #0b1020;     /* fondo general sobrio */
+  color: #E9EDFF;
+  display: grid;
+  place-items: start center;
+  gap: 12px;
+  padding: 16px;
+}
+
+/* Encabezado HUD */
+h1 { margin: 0; font-size: 18px; color:#c6d4ff }
+.hud {
+  width: 600px;
+  display:flex; justify-content: space-between; align-items:center; gap:12px;
+}
+
+/* Marco contenedor */
+.frame {
+  position: relative;
+  width:600px; height:600px;
+  border-radius: 14px;
+  padding: 10px;
+  background: #0f1730;   /* color sólido */
+  box-shadow: 0 14px 36px rgba(0,0,0,.45),
+              inset 0 0 0 1px rgba(255,255,255,.06);
+}
+
+/* Canvas principal */
+#game {
+  width: 600px; height: 600px;
+  border-radius: 12px;
+  background: #0d132b;   /* canvas limpio, sin patrón */
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+}
+
+/* Capa extra decorativa (gradiente ligero) */
+.gridTint {
+  position:absolute; left:10px; top:10px;
+  width:600px; height:600px;
+  border-radius:12px; pointer-events:none;
+  opacity:.18;
+  mix-blend-mode: normal; /* ya no usa screen, más formal */
+}
+
+/* Texto de ayuda */
+.help { width: 600px; color:#a9b6ff; font-size:14px }
+
+/* Botones */
+button {
+  background: #2c4dd7; color:#e7ecff; border: none;
+  padding: 8px 12px; border-radius: 10px; cursor: pointer;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.12);
+}
+button:hover { filter: brightness(1.08); }
+
+/* Overlay (pausa / game over) */
+.overlay.hidden { display:none; }
+.overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.5);
+  display:grid; place-items:center;
+}
+.modal {
+  background:#0f1738;
+  padding: 20px;
+  border-radius: 12px;
+  width: 420px;
+  text-align:center;
+  box-shadow: 0 10px 30px rgba(0,0,0,.5);
+}
+.modal h2 { margin-top:0 }

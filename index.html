@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Víbora 2D</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="hud">
+    <div class="left">
+      <h1>SNAKE 2D</h1>
+      <div id="status">
+        Puntaje: <b id="score">0</b>
+        • Nivel: <b id="level">1</b>
+        • Velocidad: <b id="speed">8</b>/s
+        • Comida cambia en: <b id="foodTimer">—</b>s
+      </div>
+    </div>
+    <div class="right">
+      <button id="btnPause" title="P">⏸ Pausa</button>
+      <button id="btnReset" title="R">🔄 Reiniciar</button>
+    </div>
+  </div>
+
+  <div class="frame">
+    <canvas id="game" width="600" height="600"></canvas>
+    <canvas id="tint" class="gridTint" width="600" height="600"></canvas>
+  </div>
+
+  <div class="help">
+    <p><b>Controles:</b> ← ↑ → ↓ / WASD · P (pausa) · R (reiniciar)</p>
+  </div>
+
+  <div id="overlay" class="overlay hidden">
+    <div class="modal">
+      <h2 id="modalTitle">Juego en pausa</h2>
+      <p id="modalText">Presiona <b>P</b> para continuar.</p>
+      <button id="modalBtn">Continuar</button>
+    </div>
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
